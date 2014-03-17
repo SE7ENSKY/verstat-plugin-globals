@@ -1,7 +1,8 @@
 module.exports = (next) ->
 	@config.globals = "globals" unless Object.hasOwnProperty.call @config, 'globals'
 
-	readfile = (srcFilename) => @queryFile(srcFilename: srcFilename).source
+	fs = require 'fs'
+	readfile = (srcFilename) => fs.readFileSync @queryFile(srcFilename: srcFilename).srcFilePath, encoding: "utf8"
 	
 	fetchGlobalsDepends = (file) =>
 		dependsOnFiles = []
